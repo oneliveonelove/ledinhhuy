@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lê Đình Huy - Game Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- PHONG CÁCH CHUNG --- */
+        :root {
+            --bg-color: #0a0a0a;
+            --card-bg-color: rgba(20, 20, 20, 0.8);
+            --text-color: #f0f0f0;
+            --primary-color: #bb86fc;
+            --secondary-color: #03dac6;
+            --danger-color: #cf6679;
+            --font-heading: 'Orbitron', sans-serif;
+            --font-body: 'Roboto', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        /* --- PHẦN TIÊU ĐỀ HERO --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            /* ĐÃ SỬA ĐƯỜNG DẪN ẢNH NỀN */
+            background: linear-gradient(rgba(10, 10, 10, 0.5), rgba(10, 10, 10, 0.7)), url('hero-bg.jpg') center/cover no-repeat;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(187, 134, 252, 0.1) 0%, rgba(10, 10, 10, 0.4) 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .hero-content {
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-family: var(--font-heading);
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--primary-color);
+            text-shadow: 0 0 20px rgba(187, 134, 252, 0.7);
+            margin-bottom: 10px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: var(--secondary-color);
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        .hero a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 10px 20px;
+            border: 1px solid var(--primary-color);
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease-out 1s both;
+        }
+
+        .hero a:hover {
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+            box-shadow: 0 0 15px var(--primary-color);
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- PHẦN NỘI DUNG GAME --- */
+        .game-section {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 20px;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .game-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 10, 0.6);
+        }
+
+        .game-content {
+            max-width: 800px;
+            z-index: 1;
+            text-align: center;
+            padding: 40px;
+            background: rgba(30, 30, 30, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .game-content:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 50px rgba(187, 134, 252, 0.3);
+        }
+
+        .game-content h2 {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .game-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #e0e0e0;
+        }
+
+        .game-content .actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-family: var(--font-heading);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .btn-register {
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+        }
+        .btn-register:hover {
+            background-color: #a870e4;
+        }
+
+        .btn-download {
+            background-color: var(--secondary-color);
+            color: var(--bg-color);
+        }
+        .btn-download:hover {
+            background-color: #02c8b5;
+        }
+
+        /* --- HÌNH NỀN RIÊNG CHO TỪNG GAME --- */
+        #bleachsm {
+            /* ĐÃ SỬA ĐƯỜNG DẪN ẢNH NỀN */
+            background-image: url('bleach-bg.jpg');
+        }
+        #cochanhan {
+            /* ĐÃ SỬA ĐƯỜNG DẪN ẢNH NỀN */
+            background-image: url('cochanhan-bg.jpg');
+        }
+
+        /* --- POPUP MODAL (Cải tiến) --- */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 2000; 
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
+            margin: auto;
+            padding: 40px;
+            border: 1px solid rgba(187, 134, 252, 0.3);
+            border-radius: 15px;
+            width: 90%;
+            max-width: 550px;
+            position: relative;
+            animation: slideIn 0.5s;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        }
+
+        @keyframes slideIn {
+            from {opacity: 0; transform: scale(0.8);}
+            to {opacity: 1; transform: scale(1);}
+        }
+
+        .close {
+            color: #aaa;
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 35px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: var(--danger-color);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-body h3 {
+            font-family: var(--font-heading);
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            font-size: 1.8rem;
+        }
+
+        .modal-body .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .modal-body label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .modal-body input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #555;
+            background-color: #333;
+            color: var(--text-color);
+            font-size: 1rem;
+        }
+
+        .modal-body iframe {
+            width: 100%;
+            height: 450px;
+            border: 1px solid #555;
+            border-radius: 8px;
+        }
+
+        .security-warning {
+            background-color: rgba(207, 102, 121, 0.2);
+            border-left: 4px solid var(--danger-color);
+            padding: 12px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            text-align: left;
+            border-radius: 5px;
+        }
+
+        /* --- FOOTER --- */
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            background-color: var(--bg-color);
+            font-size: 1rem;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>LÊ ĐÌNH HUY</h1>
+            <p>Game Developer & Creative Mind</p>
+            <a href="https://www.facebook.com/le.inh.huy.412963" target="_blank">Liên hệ với tôi</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="bleachsm" class="game-section">
+            <div class="game-content">
+                <h2>BleachSM</h2>
+                <p>Trải nghiệm thế giới Soul Reaper ngay trên thiết bị di động của bạn. Sẵn sàng cho những trận chiến đỉnh cao?</p>
+                <div class="actions">
+                    <button class="btn btn-register" data-game="bleachsm">Đăng ký</button>
+                    <a href="https://drive.google.com/file/d/10GREBHcIYLCvN61LEXqIuOwhFVwpQPUq/view" target="_blank" class="btn btn-download">Tải Game</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="cochanhan" class="game-section">
+            <div class="game-content">
+                <h2>Cổ Chân Nhân</h2>
+                <p>Bước vào hành trình tu tiên đầy gian truân và hùng vĩ. Khai mở tiềm năng, trở thành bậc cường giả.</p>
+                <div class="actions">
+                    <button class="btn btn-register" data-game="cochanhan">Đăng ký</button>
+                    <a href="https://drive.google.com/file/d/17H-kZS0JCUGIVrdyKQPMIUL2KDUh-QOq/view?usp=sharing" target="_blank" class="btn btn-download">Tải Game</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 Lê Đình Huy. Designed with passion.</p>
+    </footer>
+
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-body">
+                </div>
+        </div>
+    </div>
+
+    <script>
+        // Lấy các phần tử DOM
+        const modal = document.getElementById("registerModal");
+        const modalBody = modal.querySelector(".modal-body");
+        const btnsRegister = document.querySelectorAll(".btn-register");
+        const spanClose = document.getElementsByClassName("close")[0];
+
+        // Nội dung cho form đăng ký rỗng (Game Mobile)
+        const emptyFormContent = `
+            <h3>Đăng ký BleachSM</h3>
+            <p style="text-align:center; color:#aaa;">Tính năng đang được phát triển. Hãy sẵn sàng cho sự kiện ra mắt sắp tới!</p>
+            <form onsubmit="event.preventDefault(); alert('Chức năng chưa có!');">
+                <div class="form-group">
+                    <label for="username-bleach">Tài khoản:</label>
+                    <input type="text" id="username-bleach" placeholder="Nhập tài khoản..." disabled>
+                </div>
+                <div class="form-group">
+                    <label for="password-bleach">Mật khẩu:</label>
+                    <input type="password" id="password-bleach" placeholder="Nhập mật khẩu..." disabled>
+                </div>
+                <div class="form-group">
+                    <label for="email-bleach">Email:</label>
+                    <input type="email" id="email-bleach" placeholder="Nhập email..." disabled>
+                </div>
+                <button type="submit" class="btn btn-register" style="width: 100%; cursor: not-allowed;" disabled>Đăng ký (Sắp ra mắt)</button>
+            </form>
+        `;
+
+        // Nội dung cho form nhúng iframe (Game PC)
+        const iframeContent = `
+            <h3>Đăng ký Cổ Chân Nhân</h3>
+            <div class="security-warning">
+                <strong>Cảnh báo:</strong> Bạn đang truy cập vào một trang không an toàn (HTTP). Vui lòng không nhập thông tin nhạy cảm trên các mạng công cộng.
+            </div>
+            <iframe src="http://136.110.42.249:49280/" title="Đăng ký Cổ Chân Nhân"></iframe>
+        `;
+
+        // Lặp qua tất cả các nút "Đăng ký" để gán sự kiện
+        btnsRegister.forEach(button => {
+            button.onclick = function() {
+                const gameType = this.getAttribute('data-game');
+                if (gameType === 'bleachsm') {
+                    modalBody.innerHTML = emptyFormContent;
+                } else if (gameType === 'cochanhan') {
+                    modalBody.innerHTML = iframeContent;
+                }
+                modal.style.display = 'flex';
+            }
+        });
+
+        // Khi nhấn vào nút (x), đóng modal
+        spanClose.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // Khi nhấn vào bất kỳ đâu ngoài modal, cũng đóng modal
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+</html> 
