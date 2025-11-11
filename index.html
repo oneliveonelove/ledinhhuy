@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lê Đình Huy - Game Developer</title>
+    <title>Lê Đình Huy -  Developer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
@@ -185,6 +185,7 @@
             text-decoration: none;
             transition: all 0.3s ease;
             font-family: var(--font-heading);
+            display: inline-block; /* Thêm để <a> hoạt động đúng */
         }
 
         .btn:hover {
@@ -218,102 +219,6 @@
             background-image: url('cochanhan-bg.jpg');
         }
 
-        /* --- POPUP MODAL (Cải tiến) --- */
-        .modal {
-            display: none; 
-            position: fixed; 
-            z-index: 2000; 
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto; 
-            background-color: rgba(0,0,0,0.8);
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(5px);
-        }
-
-        .modal-content {
-            background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
-            margin: auto;
-            padding: 40px;
-            border: 1px solid rgba(187, 134, 252, 0.3);
-            border-radius: 15px;
-            width: 90%;
-            max-width: 550px;
-            position: relative;
-            animation: slideIn 0.5s;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-        }
-
-        @keyframes slideIn {
-            from {opacity: 0; transform: scale(0.8);}
-            to {opacity: 1; transform: scale(1);}
-        }
-
-        .close {
-            color: #aaa;
-            position: absolute;
-            top: 20px;
-            right: 25px;
-            font-size: 35px;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: var(--danger-color);
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .modal-body h3 {
-            font-family: var(--font-heading);
-            margin-bottom: 20px;
-            color: var(--primary-color);
-            font-size: 1.8rem;
-        }
-
-        .modal-body .form-group {
-            margin-bottom: 15px;
-            text-align: left;
-        }
-
-        .modal-body label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        .modal-body input {
-            width: 100%;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #555;
-            background-color: #333;
-            color: var(--text-color);
-            font-size: 1rem;
-        }
-
-        .modal-body iframe {
-            width: 100%;
-            height: 450px;
-            border: 1px solid #555;
-            border-radius: 8px;
-        }
-
-        .security-warning {
-            background-color: rgba(207, 102, 121, 0.2);
-            border-left: 4px solid var(--danger-color);
-            padding: 12px;
-            margin-bottom: 20px;
-            font-size: 0.9rem;
-            text-align: left;
-            border-radius: 5px;
-        }
-
         /* --- FOOTER --- */
         .footer {
             text-align: center;
@@ -324,6 +229,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <header class="hero">
@@ -340,7 +246,7 @@
                 <h2>BleachSM</h2>
                 <p>Trải nghiệm thế giới Soul Reaper ngay trên thiết bị di động của bạn. Sẵn sàng cho những trận chiến đỉnh cao?</p>
                 <div class="actions">
-                    <button class="btn btn-register" data-game="bleachsm">Đăng ký</button>
+                    <a href="http://34.124.171.165:9999/" target="_blank" class="btn btn-register">Đăng ký</a>
                     <a href="https://drive.google.com/file/d/10GREBHcIYLCvN61LEXqIuOwhFVwpQPUq/view" target="_blank" class="btn btn-download">Tải Game</a>
                 </div>
             </div>
@@ -351,7 +257,7 @@
                 <h2>Cổ Chân Nhân</h2>
                 <p>Bước vào hành trình tu tiên đầy gian truân và hùng vĩ. Khai mở tiềm năng, trở thành bậc cường giả.</p>
                 <div class="actions">
-                    <button class="btn btn-register" data-game="cochanhan">Đăng ký</button>
+                    <a href="https://34.142.154.254:81/" target="_blank" class="btn btn-register">Đăng ký</a>
                     <a href="https://drive.google.com/file/d/17H-kZS0JCUGIVrdyKQPMIUL2KDUh-QOq/view?usp=sharing" target="_blank" class="btn btn-download">Tải Game</a>
                 </div>
             </div>
@@ -359,79 +265,8 @@
     </main>
 
     <footer class="footer">
-        <p>&copy; 2024 Lê Đình Huy. Designed with passion.</p>
+        <p>&copy; 2025 Lê Đình Huy. Designed with passion.</p>
     </footer>
 
-    <div id="registerModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div class="modal-body">
-                </div>
-        </div>
-    </div>
-
-    <script>
-        // Lấy các phần tử DOM
-        const modal = document.getElementById("registerModal");
-        const modalBody = modal.querySelector(".modal-body");
-        const btnsRegister = document.querySelectorAll(".btn-register");
-        const spanClose = document.getElementsByClassName("close")[0];
-
-        // Nội dung cho form đăng ký rỗng (Game Mobile)
-        const emptyFormContent = `
-            <h3>Đăng ký BleachSM</h3>
-            <p style="text-align:center; color:#aaa;">Tính năng đang được phát triển. Hãy sẵn sàng cho sự kiện ra mắt sắp tới!</p>
-            <form onsubmit="event.preventDefault(); alert('Chức năng chưa có!');">
-                <div class="form-group">
-                    <label for="username-bleach">Tài khoản:</label>
-                    <input type="text" id="username-bleach" placeholder="Nhập tài khoản..." disabled>
-                </div>
-                <div class="form-group">
-                    <label for="password-bleach">Mật khẩu:</label>
-                    <input type="password" id="password-bleach" placeholder="Nhập mật khẩu..." disabled>
-                </div>
-                <div class="form-group">
-                    <label for="email-bleach">Email:</label>
-                    <input type="email" id="email-bleach" placeholder="Nhập email..." disabled>
-                </div>
-                <button type="submit" class="btn btn-register" style="width: 100%; cursor: not-allowed;" disabled>Đăng ký (Sắp ra mắt)</button>
-            </form>
-        `;
-
-        // Nội dung cho form nhúng iframe (Game PC)
-        const iframeContent = `
-            <h3>Đăng ký Cổ Chân Nhân</h3>
-            <div class="security-warning">
-                <strong>Cảnh báo:</strong> Bạn đang truy cập vào một trang không an toàn (HTTP). Vui lòng không nhập thông tin nhạy cảm trên các mạng công cộng.
-            </div>
-            <iframe src="http://136.110.42.249:49280/" title="Đăng ký Cổ Chân Nhân"></iframe>
-        `;
-
-        // Lặp qua tất cả các nút "Đăng ký" để gán sự kiện
-        btnsRegister.forEach(button => {
-            button.onclick = function() {
-                const gameType = this.getAttribute('data-game');
-                if (gameType === 'bleachsm') {
-                    modalBody.innerHTML = emptyFormContent;
-                } else if (gameType === 'cochanhan') {
-                    modalBody.innerHTML = iframeContent;
-                }
-                modal.style.display = 'flex';
-            }
-        });
-
-        // Khi nhấn vào nút (x), đóng modal
-        spanClose.onclick = function() {
-            modal.style.display = "none";
-        }
-
-        // Khi nhấn vào bất kỳ đâu ngoài modal, cũng đóng modal
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
-
 </body>
-</html> 
+</html>
